@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VeriTrust AI - Product authentication</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">VeriTrust <span>AI</span></div>
+    <nav class="switch" role="tablist">
+      <button class="tab" data-view="user">User side</button>
+      <!-- Client side tab dynamic active class handle aagum -->
+      <button class="tab active" data-view="client">Client side</button>
+    </nav>
+    <div id="status" class="status">Checking backend...</div>
+  </header>
+
+  <main>
+    <section id="user" class="view">
+      <div class="intro">
+        <h1>Is your product genuine?</h1>
+        <p>Upload a photo of the product and enter the serial code printed on its pack.</p>
+      </div>
+      <div class="grid">
+        <div class="card scanner">
+          <label class="drop" id="drop">
+            <input type="file" id="file" accept="image/*" hidden>
+            <img id="preview" alt="" hidden>
+            <div class="scanline" id="scanline"></div>
+            <span id="dropText">Tap to upload product image</span>
+          </label>
+          <input class="field" id="serial" placeholder="Serial code, e.g. VT-1001">
+          <button class="btn" id="verify">Verify product</button>
+        </div>
+        <div class="card result" id="result">
+          <div class="empty">Your result will appear here after the scan.</div>
+        </div>
+      </div>
+      <h2>Your recent scans</h2>
+      <div class="card">
+        <ul id="history" class="history">
+          <li class="muted">No scans yet.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Active view direct aayi Client Side aayi irukkum -->
+    <section id="client" class="view active">
+      <!-- Login card hidden aakiyullathu -->
+      <div id="login" class="card login" hidden>
+        <h1>Client login</h1>
+        <p class="muted">Brand owners sign in to see product and scan reports.</p>
+        <input class="field" id="lUser" placeholder="Username">
+        <input class="field" id="lPass" type="password" placeholder="Password">
+        <button class="btn" id="loginBtn">Sign in</button>
+        <p id="lMsg" class="muted">Demo login: admin / brand123</p>
+      </div>
+
+      <!-- Main Dashboard direct aayi open aagum -->
+      <div id="dash" class="dash">
+        <aside class="side">
+          <button class="sb active" data-p="overview">Overview</button>
+          <button class="sb" data-p="products">Products</button>
+          <button class="sb" data-p="scanlog">Scan log</button>
+          <button class="sb" data-p="alerts">Alerts <span id="badge" class="badge">0</span></button>
+          <button class="sb" id="logout">Log out</button>
+        </aside>
+        <div class="panels">
+          <div class="panel active" id="p-overview">
+            <div class="stats" id="stats">
+              <div class="card">Total Scans: <b>124</b></div>
+              <div class="card">Authentic: <b>98</b></div>
+              <div class="card">Counterfeit: <b>26</b></div>
+            </div>
+            <div class="grid" style="margin-top: 15px;">
+              <div class="card">
+                <h3>Verdict split</h3>
+                <div class="pieWrap">
+                  <div id="pie" class="pie"></div>
+                  <div id="legend">Authentic: 80% | Fake: 20%</div>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Scans per day</h3>
+                <div id="bars" class="bars">Daily analytics report view</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-products">
+            <div class="grid">
+              <div class="card">
+                <h3>Register a product</h3>
+                <input class="field" id="pName" placeholder="Product name">
+                <input class="field" id="pSerial" placeholder="Serial code">
+                <input class="field" id="pBatch" placeholder="Batch number">
+                <button class="btn" id="addProduct">Save product</button>
+                <p id="pMsg" class="muted"></p>
+              </div>
+              <div class="card">
+                <h3>Registered products</h3>
+                <table>
+                  <thead>
+                    <tr><th>Serial</th><th>Name</th><th>Batch</th><th>Scans</th></tr>
+                  </thead>
+                  <tbody id="products">
+                    <tr><td>VT-1001</td><td>Nike Air Max</td><td>A1B2C3</td><td>15</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p-scanlog">
+            <div class="card">
+              <h3>Customer scan log</h3>
+              <table>
+                <thead>
+                  <tr><th>Time</th><th>Serial</th><th>Verdict</th><th>Confidence</th></tr>
+                </thead>
+                <tbody id="scans">
+                  <tr><td>10:30 AM</td><td>VT-1001</td><td>Authentic</td><td>95%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" id="p-alerts">
+            <div class="card">
+              <h3>Alerts & Suspicious Activity</h3>
+              <p>No new alerts found.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
